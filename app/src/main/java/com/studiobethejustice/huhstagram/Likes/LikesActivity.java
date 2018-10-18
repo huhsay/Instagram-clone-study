@@ -1,4 +1,4 @@
-package com.studiobethejustice.huhstagram;
+package com.studiobethejustice.huhstagram.Likes;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.studiobethejustice.huhstagram.R;
 import com.studiobethejustice.huhstagram.Utils.BottomNavigationViewHelper;
 
 public class LikesActivity extends AppCompatActivity {

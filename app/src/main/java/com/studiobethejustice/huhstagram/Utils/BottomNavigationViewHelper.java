@@ -8,12 +8,12 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-import com.studiobethejustice.huhstagram.HomeActivity;
-import com.studiobethejustice.huhstagram.LikesActivity;
-import com.studiobethejustice.huhstagram.ProfileActivity;
+import com.studiobethejustice.huhstagram.Home.HomeActivity;
+import com.studiobethejustice.huhstagram.Likes.LikesActivity;
+import com.studiobethejustice.huhstagram.Profile.ProfileActivity;
 import com.studiobethejustice.huhstagram.R;
-import com.studiobethejustice.huhstagram.SearchActivity;
-import com.studiobethejustice.huhstagram.ShareActivity;
+import com.studiobethejustice.huhstagram.Search.SearchActivity;
+import com.studiobethejustice.huhstagram.Share.ShareActivity;
 
 public class BottomNavigationViewHelper {
 
