@@ -54,6 +54,8 @@ public class BottomNavigationViewHelper {
                         break;
                 }
                 return false;
+
+                // gittest2
             }
         });
     }
