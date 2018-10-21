@@ -1,8 +1,10 @@
 package com.studiobethejustice.huhstagram.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,15 +37,19 @@ public class EditProfileFragment extends Fragment{
         backButton = view.findViewById(R.id.backArrow);
 
 
-        initImageLoader();
         setProfileImage();
 
-        return view;
-    }
+        //back arrow for navigating back to "ProfileActivity"
+        ImageView backArrow = view.findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating back to ProfileActivity");
+                getActivity().finish();
+            }
+        });
 
-    private void initImageLoader(){
-        UniversalImageLoader universalImageLoader = new UniversalImageLoader(getActivity());
-        ImageLoader.getInstance().init(universalImageLoader.getConfig());
+        return view;
     }
 
     private void setProfileImage(){

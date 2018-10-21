@@ -19,7 +19,6 @@
         </RelativeLayout>
 
         <!-- Middle Section-->
-
         <RelativeLayout
             android:id="@+id/relLayout2"
             android:layout_width="match_parent"
@@ -27,6 +26,7 @@
             android:layout_below="@id/relLayout1"
             android:background="@drawable/white_grey_border_bottom">
 
+            <!-- photo, info of follower -->
             <LinearLayout
                 android:id="@+id/linLayout"
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                     android:gravity="center">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_image"
+                        android:id="@+id/profile_photo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:civ_border_color="@color/grey"
@@ -61,9 +61,9 @@
 
                 </RelativeLayout>
 
-
             </LinearLayout>
 
+            <!--  info of text -->
             <LinearLayout
                 android:id="@id/relLayout2"
                 android:layout_width="match_parent"
@@ -101,6 +101,7 @@
 
             </LinearLayout>
 
+            <!-- GridView -->
             <RelativeLayout
                 android:id="@+id/relLayout3"
                 android:layout_width="match_parent"
@@ -117,7 +118,6 @@
                     android:verticalSpacing="1dp"
                     android:stretchMode="columnWidth"
                     android:gravity="center"></GridView>
-
 
             </RelativeLayout>
 

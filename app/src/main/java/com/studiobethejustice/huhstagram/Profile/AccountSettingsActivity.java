@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,14 +15,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.studiobethejustice.huhstagram.R;
+import com.studiobethejustice.huhstagram.Utils.BottomNavigationViewHelper;
 import com.studiobethejustice.huhstagram.Utils.SectionsStatePagerAdapter;
 
 import java.util.ArrayList;
 
 public class AccountSettingsActivity extends AppCompatActivity {
-
     private static final String TAG = "AccountSettingsActivity";
+    private static final int ACTIVITY_NUM = 4;
 
     private Context mContext;
 
@@ -40,7 +44,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         setUpSettingList();
         setUpFragments();
-        
+        setupBottomNavigationView();
+
         //setup the backarrow for navigating back to "profileActivity"
         ImageView backArrow = findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -52,20 +57,20 @@ public class AccountSettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpFragments(){
+    private void setUpFragments() {
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.edit_profile));
-        pagerAdapter.addFragment(new SignOutFragment(), getString(R.string.edit_profile));
+        pagerAdapter.addFragment(new SignOutFragment(), getString(R.string.sign_out));
     }
 
-    private void setViewPager(int fragmentNumber){
+    private void setViewPager(int fragmentNumber) {
         mRelativeLayout.setVisibility(View.GONE);
         Log.d(TAG, "setViewPager: Nevigating to fragment #: " + fragmentNumber);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(fragmentNumber);
     }
 
-    private void setUpSettingList(){
+    private void setUpSettingList() {
         Log.d(TAG, "setUpSettingList: initiallizing 'Account Settings' list.");
         ListView listView = findViewById(R.id.lvAccountSettings);
 
@@ -83,5 +88,18 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 setViewPager(position);
             }
         });
+    }
+
+    /**
+     * BottomNavigationView setup
+     */
+    private void setupBottomNavigationView() {
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setUpBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }
