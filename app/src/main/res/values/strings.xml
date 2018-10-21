@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">huhstagram</string>
+
+    <!-- Account Settings -->
+    <string name="edit_profile">Edit Profile</string>
+    <string name="sign_out">Sing Out</string>
 </resources>

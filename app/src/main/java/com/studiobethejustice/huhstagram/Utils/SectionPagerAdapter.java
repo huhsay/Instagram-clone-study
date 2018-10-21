@@ -1,4 +1,4 @@
-package com.studiobethejustice.huhstagram;
+package com.studiobethejustice.huhstagram.Utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

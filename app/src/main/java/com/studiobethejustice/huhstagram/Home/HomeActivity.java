@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.studiobethejustice.huhstagram.R;
-import com.studiobethejustice.huhstagram.SectionPagerAdapter;
+import com.studiobethejustice.huhstagram.Utils.SectionPagerAdapter;
 import com.studiobethejustice.huhstagram.Utils.BottomNavigationViewHelper;
 
 public class HomeActivity extends AppCompatActivity {
