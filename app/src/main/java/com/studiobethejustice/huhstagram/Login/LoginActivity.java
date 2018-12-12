@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Context mContext;
     private ProgressBar mProgressBar;
-    private EditText mEmail, mPasswortd;
+    private EditText mEmail, mPassword;
     private TextView mPleaseWait;
 
     @Override
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
         mPleaseWait = findViewById(R.id.pleaseWait);
         mEmail = findViewById(R.id.input_email);
-        mPasswortd = findViewById(R.id.input_password);
+        mPassword = findViewById(R.id.input_password);
         mContext = LoginActivity.this;
 
         Log.d(TAG, "onCreate: started.");
@@ -75,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: attempting to log in");
 
                 String email = mEmail.getText().toString();
-                String password = mPasswortd.getText().toString();
+                String password = mPassword.getText().toString();
 
                 if (!isStringNull(email) && isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_LONG).show();
