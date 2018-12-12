@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studiobethejustice.huhstagram.R;
@@ -41,6 +44,52 @@ public class RegisterActivity extends AppCompatActivity {
         setupFirebaseAuth();
     }
 
+    private void init(){
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = mEmail.getText().toString();
+                password = mPassword.getText().toString();
+                username = mUsername.getText().toString();
+
+                if(checkInputs(email, password, username)){
+                    mProgressBar.setVisibility(View.VISIBLE);
+
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        updateUI(null);
+                                    }
+
+                                    // ...
+                                }
+                            });
+
+                }
+            }
+        });
+    }
+
+    private boolean checkInputs(String email, String password, String username) {
+        Log.d(TAG, "checkInputs: checking inputs for null values.");
+        if(email.equals("") || password.equals("") || username.equals("")){
+            Toast.makeText(mContext, "All fields must be filled out.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Initialize the activity widgets
      */
@@ -54,6 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.input_email);
         mPassword = findViewById(R.id.input_password);
         mUsername = findViewById(R.id.input_username);
+        btnRegister = findViewById(R.id.btn_register);
         mContext = RegisterActivity.this;
 
         mProgressBar.setVisibility(View.GONE);
