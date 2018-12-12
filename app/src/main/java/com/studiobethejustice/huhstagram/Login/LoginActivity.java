@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -55,18 +56,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private  boolean isStringNull(String string){
+    private boolean isStringNull(String string) {
         Log.d(TAG, "isStringNull: checking string if null");
 
-        if(string.equals("")){
+        if (string.equals("")) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    private void init(){
+    private void init() {
         //initialize the button for Logging in
         Button btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -77,9 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPasswortd.getText().toString();
 
-                if(!isStringNull(email) && isStringNull(password)){
+                if (!isStringNull(email) && isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     mPleaseWait.setVisibility(View.VISIBLE);
                     mProgressBar.setVisibility(View.VISIBLE);
 
@@ -108,16 +108,31 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
 
-                    if( mAuth.getCurrentUser() != null){
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
                 }
 
             }
         });
+
+        TextView linkSignUp = findViewById(R.id.link_signup);
+        linkSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating to register screen");
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        /*
+        If the user is Logged in then navigate to HomeActivity and call finish;
+        */
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     /**
