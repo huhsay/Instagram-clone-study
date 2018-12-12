@@ -4,4 +4,8 @@
     <!-- Account Settings -->
     <string name="edit_profile">Edit Profile</string>
     <string name="sign_out">Sing Out</string>
+
+    <!-- Firebase message-->
+    <string name="auth_failed">Failed to Authenticate</string>
+    <string name="auth_success">Authentication Success</string>
 </resources>

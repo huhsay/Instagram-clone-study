@@ -38,4 +38,11 @@ dependencies {
     //Universal image loader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
+    //Firebase authentication
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -9,4 +9,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="blue">#1759f4</color>
+
+    <!-- button -->
+    <color name="main_blue">#3897f2</color>
 </resources>

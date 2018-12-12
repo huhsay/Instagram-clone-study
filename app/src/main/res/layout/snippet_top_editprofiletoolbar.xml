@@ -1,6 +1,6 @@
-<merge xmlns:tools="http://schemas.android.com/tools"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -10,8 +10,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/editProfileToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"

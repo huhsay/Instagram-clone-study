@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1037682140321",
+    "firebase_url": "https://huhstagram.firebaseio.com",
+    "project_id": "huhstagram",
+    "storage_bucket": "huhstagram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037682140321:android:05cc264de7a97478",
+        "android_client_info": {
+          "package_name": "com.studiobethejustice.huhstagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037682140321-bd1cc6u2tf4kb1gmvvup2s2snrc5puj5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.studiobethejustice.huhstagram",
+            "certificate_hash": "c05b6ce062972a3d9f08d23bae374545df3bea12"
+          }
+        },
+        {
+          "client_id": "1037682140321-qmm6alhmj327ic917skep7h77krkfe3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQyQGLL6f_z3iwzRDzjSG3hQa_Ao2t9Lw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037682140321-qmm6alhmj327ic917skep7h77krkfe3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
