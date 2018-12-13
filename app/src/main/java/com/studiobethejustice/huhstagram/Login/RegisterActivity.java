@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.studiobethejustice.huhstagram.R;
 import com.studiobethejustice.huhstagram.Utils.FirebaseMethods;
 
@@ -25,6 +30,11 @@ public class RegisterActivity extends AppCompatActivity {
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+
+    private String append;
 
     private Context mContext;
     private String email, username, password;
@@ -32,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView loadingPleaseWait;
     private Button btnRegister;
     private ProgressBar mProgressBar;
-    private FirebaseMethods firebaseMethods;
 
     private static final String TAG = "RegisterActivity";
 
@@ -101,6 +110,10 @@ public class RegisterActivity extends AppCompatActivity {
     private void setupFirebaseAuth() {
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth.");
         mAuth = FirebaseAuth.getInstance();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -108,6 +121,29 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged: signed_in" + user.getUid());
+
+                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //1st Check: Make sure the username is not already in use
+
+                            if(firebaseMethods.checkIfUsernameExists(username, dataSnapshot)){
+                                append = myRef.push().getKey().substring(3, 10);
+                                Log.d(TAG, "onDataChange: username already dxists. Appending random string to name: " + append);
+                            }
+
+
+
+                            //add new user to the database
+
+                            //add new user_account_setting to the database
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 } else {
                     Log.d(TAG, "onAuthStateChanged: signed_out");
                 }
