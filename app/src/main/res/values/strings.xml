@@ -10,8 +10,14 @@
     <string name="auth_failed">Failed to Authenticate</string>
     <string name="auth_success">Authentication Success</string>
 
-    <!-- Rirebase databas rields -->
+    <!-- Rirebase databas fields -->
     <string name="dbname_users">users</string>
     <string name="dbname_user_account_settings">user_account_settings</string>
+
+    <!-- Intent Extras -->
+    <string name="calling_activity">calling_activity</string>
+
+    <!-- Activity -->
+    <string name="profile_activity">profile_activity</string>
 
 </resources>

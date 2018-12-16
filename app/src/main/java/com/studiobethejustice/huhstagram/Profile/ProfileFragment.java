@@ -79,14 +79,26 @@ public class ProfileFragment extends Fragment {
         toolbar = view.findViewById(R.id.profileToolBar);
         profileMenu = view.findViewById(R.id.profileMenu);
         bottomNavigationView = view.findViewById(R.id.bottomNavViewBar);
-        mFirebaseMethods = new FirebaseMethods(mContext);
         mContext = getActivity();
+        mFirebaseMethods = new FirebaseMethods(mContext);
 
         Log.d(TAG, "onCreateView: started");
 
         setupBottomNavigationView();
         setupToolbar();
         setupFirebaseAuth();
+
+        TextView editProfile = view.findViewById(R.id.textEditProfile);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating to " + mContext.getString(R.string.edit_profile));
+
+                Intent intent = new Intent(getActivity(), AccountSettingsActivity.class);
+                intent.putExtra(getString(R.string.calling_activity), getString(R.string.profile_activity));
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

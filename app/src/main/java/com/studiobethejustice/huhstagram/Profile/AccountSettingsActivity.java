@@ -1,6 +1,7 @@
 package com.studiobethejustice.huhstagram.Profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -45,6 +46,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         setUpSettingList();
         setUpFragments();
         setupBottomNavigationView();
+        getIncomingIntent();
 
         //setup the backarrow for navigating back to "profileActivity"
         ImageView backArrow = findViewById(R.id.backArrow);
@@ -55,6 +57,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getIncomingIntent(){
+        Intent intent = getIntent();
+        if(intent.hasExtra(getString(R.string.calling_activity))){
+            Log.d(TAG, "getIncomingIntent: received incoming intent from " + getString(R.string.profile_fragment));
+            setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.edit_profile)));
+        }
     }
 
     private void setUpFragments() {
