@@ -13,8 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mContext = RegisterActivity.this;
+
         firebaseMethods = new FirebaseMethods(mContext);
         Log.d(TAG, "onCreate: started.");
 
@@ -91,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void initWidgets() {
         Log.d(TAG, "initWidgets: Initializing Widgets.");
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         mProgressBar = findViewById(R.id.progressBar);
         //loadingPleaseWait = findViewById(R.id.pleaseWait);
         mEmail = findViewById(R.id.input_email);
@@ -132,11 +131,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 Log.d(TAG, "onDataChange: username already dxists. Appending random string to name: " + append);
                             }
 
-
-
                             //add new user to the database
+                            firebaseMethods.addNewUser(email, username, "", "", "");
+                            Toast.makeText(mContext, "Signup successful. Sending verification email.", Toast.LENGTH_LONG).show();
 
-                            //add new user_account_setting to the database
+                            finish();
+
+
                         }
 
                         @Override

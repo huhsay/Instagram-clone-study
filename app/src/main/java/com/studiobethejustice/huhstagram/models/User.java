@@ -3,7 +3,7 @@ package com.studiobethejustice.huhstagram.models;
 public class User {
 
     private String user_id;
-    private String phone_number;
+    private long phone_number;
     private String username;
     private String email;
 
@@ -11,7 +11,7 @@ public class User {
 
     }
 
-    public User(String user_id, String phone_number, String username, String email) {
+    public User(String user_id, long phone_number, String username, String email) {
         this.user_id = user_id;
         this.phone_number = phone_number;
         this.username = username;
@@ -26,11 +26,11 @@ public class User {
         this.user_id = user_id;
     }
 
-    public String getPhone_number() {
+    public long getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(String phone_number) {
+    public void setPhone_number(long phone_number) {
         this.phone_number = phone_number;
     }
 
@@ -48,5 +48,15 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id='" + user_id + '\'' +
+                ", phone_number=" + phone_number +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

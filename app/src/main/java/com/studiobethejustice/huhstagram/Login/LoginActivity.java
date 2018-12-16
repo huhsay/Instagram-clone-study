@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
 
-                if (!isStringNull(email) && isStringNull(password)) {
+                if (isStringNull(email) && isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_LONG).show();
                 } else {
                     mPleaseWait.setVisibility(View.VISIBLE);
@@ -93,6 +93,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                         mPleaseWait.setVisibility(View.GONE);
                                         mProgressBar.setVisibility(View.GONE);
+
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
 
                                     } else {
                                         // If sign in fails, display a message to the user.

@@ -42,10 +42,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
     //Firebase authentication
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
 
     //Firebase database
-    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
