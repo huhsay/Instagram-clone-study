@@ -20,7 +20,6 @@ public class EditProfileFragment extends Fragment{
     private static final String TAG = "EditProfileFragment";
 
     private ImageView mProfilePhoto;
-    private ImageView backButton;
 
     private ProfileActivity mActivity;
 
@@ -34,7 +33,6 @@ public class EditProfileFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = view.findViewById(R.id.profile_photo);
-        backButton = view.findViewById(R.id.backArrow);
 
 
         setProfileImage();

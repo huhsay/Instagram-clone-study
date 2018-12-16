@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">huhstagram</string>
 
-    <!-- Account Settings -->
+    <!-- fragment names -->
     <string name="edit_profile">Edit Profile</string>
     <string name="sign_out">Sing Out</string>
+    <string name="profile_fragment">Profile</string>
 
     <!-- Firebase message-->
     <string name="auth_failed">Failed to Authenticate</string>
