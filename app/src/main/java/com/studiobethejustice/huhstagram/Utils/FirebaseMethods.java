@@ -41,25 +41,39 @@ public class FirebaseMethods {
         }
     }
 
-    public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot) {
-        Log.d(TAG, "checkIfUsernameExists: checking if" + username + " already exists.");
+    public void updateUsername(String username){
+        Log.d(TAG, "updateUsername: updating username to: " + username);
 
-        User user = new User();
+        myRef.child(mContext.getString(R.string.dbname_users))
+                .child(userId)
+                .child(mContext.getString(R.string.field_username))
+                .setValue(username);
 
-        for (DataSnapshot ds : dataSnapshot.child(userId).getChildren()) {
-            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-
-            user.setUsername(ds.getValue(User.class).getUsername());
-            Log.d(TAG, "checkIfUsernameExists: getUsername " + user.getUsername());
-
-            if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
-                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
-                return true;
-            }
-        }
-
-        return false;
+        myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                .child(userId)
+                .child(mContext.getString(R.string.field_username))
+                .setValue(username);
     }
+
+//    public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot) {
+//        Log.d(TAG, "checkIfUsernameExists: checking if" + username + " already exists.");
+//
+//        User user = new User();
+//
+//        for (DataSnapshot ds : dataSnapshot.child(userId).getChildren()) {
+//            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
+//
+//            user.setUsername(ds.getValue(User.class).getUsername());
+//            Log.d(TAG, "checkIfUsernameExists: getUsername " + user.getUsername());
+//
+//            if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
+//                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     /**
      * Register a new email and password to Firebase Authentication
@@ -82,6 +96,9 @@ public class FirebaseMethods {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(mContext, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+
+                            // 오류메세지에 따라 토스트메시지를 넣어주어야 할듯.
+                            // 내생각엔 레지스터넣을때 userid를 체크해 주어야 하지 않을까?
                         }
 
                         // ...
