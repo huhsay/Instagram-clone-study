@@ -120,7 +120,6 @@ public class ProfileFragment extends Fragment {
         mFollowing.setText(String.valueOf(settings.getFollowing()));
 
         mProgressBar.setVisibility(View.GONE);
-
     }
 
     /**
@@ -152,7 +151,7 @@ public class ProfileFragment extends Fragment {
     }
 
     /**
-     * setup the firebase auto object
+     * setup the firebase auth object
      */
 
     private void setupFirebaseAuth() {

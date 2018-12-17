@@ -27,9 +27,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_photo"
                 android:layout_centerHorizontal="true"
-                android:text="Change Photo"
+                android:text="Change Profile Photo"
                 android:textColor="@color/blue"
-                android:textSize="16sp" />
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"/>
 
             <!-- display_name section -->
             <LinearLayout
@@ -54,9 +55,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/grey_border_bottom"
-                    android:inputType="textNoSuggestions"
                     android:hint="name"
-                    android:textSize="12sp"/>
+                    android:inputType="textNoSuggestions"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
@@ -83,20 +84,20 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/grey_border_bottom"
-                    android:inputType="textNoSuggestions"
                     android:hint="username"
-                    android:textSize="12sp"/>
+                    android:inputType="textNoSuggestions"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <!-- userName section -->
+            <!-- webSite section -->
             <LinearLayout
                 android:id="@+id/linLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linLayout2"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="80dp"
@@ -112,31 +113,60 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/grey_border_bottom"
-                    android:inputType="textNoSuggestions"
                     android:hint="Website"
-                    android:textSize="12sp"/>
+                    android:inputType="textNoSuggestions"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- description section -->
+            <LinearLayout
+                android:id="@+id/linLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linLayout3"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Description"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/grey_border_bottom"
+                    android:hint="Description"
+                    android:inputType="textNoSuggestions"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/privateInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linLayout3"
                 android:layout_marginTop="40dp"
                 android:text="Private Information"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:id="@+id/privateInformation"/>
+                android:textStyle="bold" />
 
             <!-- email section-->
             <LinearLayout
-                android:id="@+id/linLayout4"
+                android:id="@+id/linLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/privateInformation"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="80dp"
@@ -152,20 +182,20 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/grey_border_bottom"
-                    android:inputType="textNoSuggestions"
                     android:hint="Email"
-                    android:textSize="12sp"/>
+                    android:inputType="textNoSuggestions"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <!-- phone section-->
             <LinearLayout
-                android:id="@+id/linLayout5"
+                android:id="@+id/linLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linLayout4"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_below="@+id/linLayout5"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="80dp"
@@ -181,45 +211,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/grey_border_bottom"
-                    android:inputType="textNoSuggestions"
                     android:hint="phone"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <!-- gender section-->
-            <LinearLayout
-                android:id="@+id/linLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linLayout5"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Gender"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/grey_border_bottom"
                     android:inputType="textNoSuggestions"
-                    android:hint="Not Specified"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
-
 
         </RelativeLayout>
-
-
 
     </ScrollView>
 
