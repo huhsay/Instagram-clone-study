@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseMethods.registerNewEmail(email, password, username);
 
                     // 성공하면 끝 날수있게 메소드를 만들어야할 듯.
+                    finish();
                 }
             }
         });

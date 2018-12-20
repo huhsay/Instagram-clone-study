@@ -14,8 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.util.CrashUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,15 +30,83 @@ import com.google.firebase.database.ValueEventListener;
 import com.studiobethejustice.huhstagram.R;
 import com.studiobethejustice.huhstagram.Utils.FirebaseMethods;
 import com.studiobethejustice.huhstagram.Utils.UniversalImageLoader;
+import com.studiobethejustice.huhstagram.dialogs.ConfirmPasswordDialog;
 import com.studiobethejustice.huhstagram.models.User;
 import com.studiobethejustice.huhstagram.models.UserAccountSettings;
 import com.studiobethejustice.huhstagram.models.UserSettings;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
     private static final String TAG = "EditProfileFragment";
+
+    @Override
+    public void onConfirmPassword(String password) {
+        Log.d(TAG, "onConfirmPassword: get the password" + password);
+
+
+        // 이메일 변경전 재 인증
+        // Get auth credentials from the user for re-authentication. The example below shows
+        // email and password credentials but there are multiple possible providers,
+        // such as GoogleAuthProvider or FacebookAuthProvider.
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(mAuth.getCurrentUser().getEmail(), password);
+
+        // Prompt the user to re-provide their sign-in credentials
+        mAuth.getCurrentUser().reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User re-authenticated.");
+
+                            // 변경하려는 이메일주소가 이미 존재하는 지 알아보는 코드
+                            mAuth.fetchProvidersForEmail(mEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<ProviderQueryResult> task) {
+                                    if(task.isSuccessful()){
+                                        try{
+
+                                            if(task.getResult().getProviders().size() == 1){
+                                                Log.d(TAG, "onComplete: that email is already in use");
+                                                Toast.makeText(getActivity(), "That email is already in user", Toast.LENGTH_SHORT).show();
+
+                                            }else{
+                                                Log.d(TAG, "onComplete: That email is available.");
+
+                                                // email 주소 업데이트 가능
+                                                mAuth.getCurrentUser().updateEmail("user@example.com")
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    Log.d(TAG, "User email address updated.");
+                                                                    Toast.makeText(getActivity(), "email updated", Toast.LENGTH_SHORT).show();
+                                                                    mFirebaseMethods.updateEmail(mEmail.getText().toString());
+                                                                }
+                                                            }
+                                                        });
+
+                                            }
+
+                                        }catch(NullPointerException e){
+                                            Log.d(TAG, "onComplete: NullPointException" + e.getMessage());
+                                        }
+                                    }
+
+
+                                }
+                            });
+                        } else {
+                            Log.d(TAG, "onComplete: re_authentication failed");
+                        }
+
+                    }
+                });
+
+
+    }
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -126,18 +199,53 @@ public class EditProfileFragment extends Fragment {
         final String website = mWebsite.getText().toString();
         final String description = mDescription.getText().toString();
         final String email = mEmail.getText().toString();
-        final long phoneNumver = Long.parseLong(mPhoneNumber.getText().toString());
+        final long phoneNumber = Long.parseLong(mPhoneNumber.getText().toString());
 
 
+        //case1: the user did not change their username;
         if (!mUserSettings.getUser().getUsername().equals(username)) {
-            Log.d(TAG, "saveProfileSettings: username was changed frome " +
-                    mUserSettings.getUser().getUsername()+ "to " + username);
-
-            //case1: the user did not change their username;
             checkIfUsernameExists(username);
-        } else {
-            //case2: the user changed their username therefore we need to for uniqueness
+        }
 
+        //case1: the user did not change their username;
+        if (!mUserSettings.getUser().getEmail().equals(email)) {
+
+            // step1 Reauthenticate
+            //       - confirm the password and email
+
+            ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
+            dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
+            dialog.setTargetFragment(EditProfileFragment.this, 1);
+
+
+            // step2 check if the email already is registred
+            //       - fetchPrevidrsForEmail(String email)
+            // step3 change the email
+            //       - submit the new email to the database and authentication
+        }
+
+        /**
+         *  Change the rest of the settings that do not require uniqueness
+         */
+        if(!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
+            //update displayname
+            mFirebaseMethods.updateUserAccoutSetting(displayName, null, null, 0);
+
+        }
+
+        if(!mUserSettings.getSettings().getWebsite().equals(website)){
+            //update website
+            mFirebaseMethods.updateUserAccoutSetting(null, website, null, 0);
+        }
+
+        if(!mUserSettings.getSettings().getDescription().equals(description)){
+            //update description
+            mFirebaseMethods.updateUserAccoutSetting(null, null, description, 0);
+        }
+
+        if(!mUserSettings.getSettings().getProfile_photo().equals(phoneNumber)){
+            //update phoneNumber
+            mFirebaseMethods.updateUserAccoutSetting(null, null, null, phoneNumber);
         }
     }
 
