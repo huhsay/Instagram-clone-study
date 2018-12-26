@@ -49,6 +49,8 @@ public class GalleryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
+        Log.d(TAG, "onCreateView: start");
+        
         galleryImage = view.findViewById(R.id.galleryImageView);
         gridView = view.findViewById(R.id.gridView);
         directorySpinner = view.findViewById(R.id.spinnerDirectory);
@@ -90,14 +92,15 @@ public class GalleryFragment extends Fragment {
             directories = FileSearch.getDirectoryPaths(filePaths.PICTURES);
         }
 
+        directories.add(filePaths.CAMERA);
+
         ArrayList<String> directoryNames = new ArrayList<>();
         for (int i = 0; i < directories.size(); i++) {
+            Log.d(TAG, "init: setting spinner");
             int index = directories.get(i).lastIndexOf("/");
             String string = directories.get(i).substring(index+1);
             directoryNames.add(string);
         }
-
-        directories.add(filePaths.CAMERA);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, directoryNames);

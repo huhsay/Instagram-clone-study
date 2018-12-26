@@ -58,6 +58,7 @@ public class ShareActivity extends AppCompatActivity {
      * setup viewpager for manager the tabs
      */
     private void setupViewPager(){
+        Log.d(TAG, "setupViewPager: settingup viewPager");
         SectionPagerAdapter adapter = new SectionPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new GalleryFragment());
         adapter.addFragment(new PhotoFragment());
