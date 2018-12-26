@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,12 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.studiobethejustice.huhstagram.Login.LoginActivity;
 import com.studiobethejustice.huhstagram.R;
 import com.studiobethejustice.huhstagram.Utils.BottomNavigationViewHelper;
 import com.studiobethejustice.huhstagram.Utils.FirebaseMethods;
 import com.studiobethejustice.huhstagram.Utils.UniversalImageLoader;
-import com.studiobethejustice.huhstagram.models.User;
 import com.studiobethejustice.huhstagram.models.UserAccountSettings;
 import com.studiobethejustice.huhstagram.models.UserSettings;
 
@@ -88,7 +85,7 @@ public class ProfileFragment extends Fragment {
         setupToolbar();
         setupFirebaseAuth();
 
-        TextView editProfile = view.findViewById(R.id.textEditProfile);
+        TextView editProfile = view.findViewById(R.id.tv_edit_profile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

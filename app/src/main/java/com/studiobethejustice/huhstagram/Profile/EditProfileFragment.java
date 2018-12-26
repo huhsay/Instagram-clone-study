@@ -1,5 +1,6 @@
 package com.studiobethejustice.huhstagram.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.util.CrashUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.studiobethejustice.huhstagram.R;
+import com.studiobethejustice.huhstagram.Share.ShareActivity;
 import com.studiobethejustice.huhstagram.Utils.FirebaseMethods;
 import com.studiobethejustice.huhstagram.Utils.UniversalImageLoader;
 import com.studiobethejustice.huhstagram.dialogs.ConfirmPasswordDialog;
@@ -144,6 +145,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mDescription = view.findViewById(R.id.description);
         mEmail = view.findViewById(R.id.email);
         mPhoneNumber = view.findViewById(R.id.phone);
+        mChangeProfilePhoto = view.findViewById(R.id.changeProfilePhoto);
         mFirebaseMethods = new FirebaseMethods(getActivity());
 
         setupFirebaseAuth();
@@ -186,6 +188,16 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mDescription.setText(settings.getDescription());
         mEmail.setText(user.getEmail());
         mPhoneNumber.setText(String.valueOf(user.getPhone_number()));
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: changing profile photo");
+                Intent intent = new Intent(getActivity(), ShareActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //268435456
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     /**
