@@ -64,7 +64,7 @@ public class FirebaseMethods {
     }
 
 
-    public void uploadNewPhoto(String photoType, final String caption, int imageCount, final String imgUrl) {
+    public void uploadNewPhoto(String photoType, final String caption, int imageCount, final String imgUrl, Bitmap bm) {
         Log.d(TAG, "uploadNewPhoto: attempting to uplaod new photo.");
 
         FilePaths filePaths = new FilePaths();
@@ -77,7 +77,9 @@ public class FirebaseMethods {
                     .child(filePaths.FIREBASE_IMAGE_STORAGE + user_id + "/photo" + (imageCount + 1));
 
             //convert image url to bitmap
-            Bitmap bm = ImageManager.getBitmap(imgUrl);
+            if (bm == null) {
+                bm = ImageManager.getBitmap(imgUrl);
+            }
             byte[] bytes = ImageManager.getBytesFromBitmap(bm, 100);
 
             UploadTask uploadTask = null;
@@ -86,11 +88,12 @@ public class FirebaseMethods {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
 
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onSuccess: getting uri " + uri);
 
                             // add the new photo to 'photo' node and 'user_photos' node
                             addPhotoToDatabase(caption, uri.toString());
@@ -127,18 +130,14 @@ public class FirebaseMethods {
             //case2) profile photo
 
             Log.d(TAG, "uploadNewPhoto: uploading new PROFILE photo.");
-
-            ((AccountSettingsActivity) mContext).setViewPager(
-                    ((AccountSettingsActivity) mContext).pagerAdapter
-                            .getFragmentNumber(mContext.getString(R.string.edit_profile))
-            );
-
             String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
             final StorageReference storageReference = mStorageReference
                     .child(filePaths.FIREBASE_IMAGE_STORAGE + user_id + "/profile_photo");
 
             //convert image url to bitmap
-            Bitmap bm = ImageManager.getBitmap(imgUrl);
+            if (bm == null) {
+                bm = ImageManager.getBitmap(imgUrl);
+            }
             byte[] bytes = ImageManager.getBytesFromBitmap(bm, 100);
 
             UploadTask uploadTask = null;
@@ -147,17 +146,24 @@ public class FirebaseMethods {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d(TAG, "onSuccess: uploading profile photo");
+                    Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
 
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onSuccess: uploading profile photo" + uri);
+                            Log.d(TAG, "onSuccess: getting url " + uri);
 
                             // insert into 'user_account_setting' node
                             setProfilePhoto(uri.toString());
                         }
                     });
+
+                    ((AccountSettingsActivity) mContext).setViewPager(
+                            ((AccountSettingsActivity) mContext).pagerAdapter
+                                    .getFragmentNumber(mContext.getString(R.string.edit_profile))
+                    );
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

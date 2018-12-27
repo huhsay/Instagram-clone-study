@@ -1,6 +1,7 @@
 package com.studiobethejustice.huhstagram.Share;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.studiobethejustice.huhstagram.Profile.AccountSettingsActivity;
 import com.studiobethejustice.huhstagram.R;
 import com.studiobethejustice.huhstagram.Utils.Permissions;
 
@@ -34,15 +36,15 @@ public class PhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onClick: launcing camera app");
+                Log.d(TAG, "onClick: launching camera app");
 
-                if(((ShareActivity)getActivity()).getCurrentTabNumber() == PHOTO_FRAGMENT_NUM){
+                if (((ShareActivity) getActivity()).getCurrentTabNumber() == PHOTO_FRAGMENT_NUM) {
 
-                    if(((ShareActivity)getActivity()).checkPermission(Permissions.CAMERA_PERMISSION[0])){
+                    if (((ShareActivity) getActivity()).checkPermission(Permissions.CAMERA_PERMISSION[0])) {
                         Log.d(TAG, "onClick: starting camera");
                         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
-                    }else{
+                    } else {
                         Intent intent = new Intent(getActivity(), ShareActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -53,16 +55,47 @@ public class PhotoFragment extends Fragment {
         return view;
     }
 
+    private boolean isRootTask() {
+        if (((ShareActivity) getActivity()).getTask() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CAMERA_REQUEST_CODE){
+        if (requestCode == CAMERA_REQUEST_CODE) {
             Log.d(TAG, "onActivityResult: done taking a photo");
             Log.d(TAG, "onActivityResult: attempting to navigate to final share screen.");
 
-            //navigate to the final share screen to publish photo
+            Bitmap bitmap;
+            bitmap = (Bitmap) data.getExtras().get("data");
 
+            if (isRootTask()) {
+                try {
+                    Log.d(TAG, "onActivityResult: received new bitmap from camera: share activity" + bitmap);
+                    Intent intent = new Intent(getActivity(), NextActivity.class);
+                    intent.putExtra(getString(R.string.selected_bitmap), bitmap);
+                    startActivity(intent);
+                } catch (NullPointerException e) {
+                    Log.d(TAG, "onActivityResult: NullPointException " + e.getMessage());
+                }
+
+            } else {
+                try {
+                    Log.d(TAG, "onActivityResult: received new bitmap from camera: edit activity" + bitmap);
+                    Intent intent = new Intent(getActivity(), AccountSettingsActivity.class);
+                    intent.putExtra(getString(R.string.selected_bitmap), bitmap);
+                    intent.putExtra(getString(R.string.return_to_fragment), getString(R.string.edit_profile));
+                    startActivity(intent);
+                    getActivity().finish();
+                } catch (NullPointerException e) {
+                    Log.d(TAG, "onActivityResult: NullPointException " + e.getMessage());
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.studiobethejustice.huhstagram.Share;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,6 +42,8 @@ public class NextActivity extends AppCompatActivity {
     private String mAppend = "file:/";
     private int imageCount = 0;
     private String imgUrl;
+    private Bitmap bitmap;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,12 +75,21 @@ public class NextActivity extends AppCompatActivity {
                 //upload the image to firebase
                 Toast.makeText(NextActivity.this, "Attempting to upload mew photo", Toast.LENGTH_SHORT).show();
                 String caption = mCaption.getText().toString();
-                mFirebaseMethods.uploadNewPhoto(getString(R.string.new_photo), caption, imageCount, imgUrl);
+
+                if(intent.hasExtra(getString(R.string.selected_image))){
+                    imgUrl = intent.getStringExtra(getString(R.string.selected_image));
+                    mFirebaseMethods.uploadNewPhoto(getString(R.string.new_photo), caption, imageCount, imgUrl, null);
+                }else if(intent.hasExtra(getString(R.string.selected_bitmap))){
+                    bitmap = (Bitmap) intent.getParcelableExtra(getString(R.string.selected_bitmap));
+                    mFirebaseMethods.uploadNewPhoto(getString(R.string.new_photo), caption, imageCount, null, bitmap);
+                }
+
+
             }
         });
     }
 
-    private void someMethod(){
+    private void someMethod() {
         /*
             Step 1)
             Create a data model for Photos
@@ -98,11 +110,20 @@ public class NextActivity extends AppCompatActivity {
     /**
      * get the image url from the incoming intent and displays the chosen image
      */
-    private void setImage(){
-        Intent intent = getIntent();
+    private void setImage() {
+        intent = getIntent();
         ImageView image = findViewById(R.id.imageShare);
-        imgUrl = intent.getStringExtra(getString(R.string.selected_image));
-        UniversalImageLoader.setImage(intent.getStringExtra(getString(R.string.selected_image)), image, null, mAppend);
+
+        if(intent.hasExtra(getString(R.string.selected_image))){
+            imgUrl = intent.getStringExtra(getString(R.string.selected_image));
+            UniversalImageLoader.setImage(imgUrl, image, null, mAppend);
+            Log.d(TAG, "setImage: got new image url: " + imgUrl);
+            
+        }else if(intent.hasExtra(getString(R.string.selected_bitmap))){
+            bitmap = (Bitmap) intent.getParcelableExtra(getString(R.string.selected_bitmap));
+            Log.d(TAG, "setImage: got new bitmap");
+            image.setImageBitmap(bitmap);
+        }
     }
 
     /**
