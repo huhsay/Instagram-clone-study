@@ -36,9 +36,7 @@ public class ShareActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
         
         if(checkPermissionsArray(Permissions.PERMISSIONS)){
-
             setupViewPager();
-
         }else{
             verifyPermissions(Permissions.PERMISSIONS);
         }
@@ -127,6 +125,18 @@ public class ShareActivity extends AppCompatActivity {
             Log.d(TAG, "checkPermission: \n Permission was granted for: " + permission);
             return true;
         }
+    }
 
+    /**
+     * BottomNavigationView setup
+     */
+    private void setupBottomNavigationView(){
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setUpBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this,bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }

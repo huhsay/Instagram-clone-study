@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/relLayout1"
-            android:background="@drawable/white_grey_border_bottom">
+            android:background="@color/white">
 
             <!-- photo, info of follower -->
             <LinearLayout
@@ -58,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linLayout"
+                android:background="@drawable/white_grey_border_bottom"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -99,14 +100,14 @@
                 android:layout_marginBottom="50dp">
 
                 <GridView
+                    android:id="@+id/gridView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gridView"
-                    android:numColumns="3"
+                    android:gravity="center"
                     android:horizontalSpacing="1dp"
-                    android:verticalSpacing="1dp"
+                    android:numColumns="3"
                     android:stretchMode="columnWidth"
-                    android:gravity="center"></GridView>
+                    android:verticalSpacing="1dp"></GridView>
 
             </RelativeLayout>
 
