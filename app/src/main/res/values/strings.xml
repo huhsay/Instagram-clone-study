@@ -5,6 +5,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="sign_out">Sing Out</string>
     <string name="profile_fragment">Profile</string>
+    <string name="view_post_fragment">View Post</string>
 
     <!-- Dialog names-->
     <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
@@ -23,6 +24,7 @@
     <string name="field_website">website</string>
     <string name="field_description">description</string>
     <string name="field_phone_number">phone_number</string>
+    <string name="field_user_id">user_id</string>
     <string name="dbname_user_photos">user_photos</string>
 
     <!-- photo type -->
@@ -32,7 +34,11 @@
     <!-- Intent Extras -->
     <string name="calling_activity">calling_activity</string>
     <string name="selected_image">selected_image</string>
+    <string name="selected_bitmap">selected_bitmap</string>
     <string name="return_to_fragment">return_to_fragment</string>
+
+    <!-- Activity -->
+    <string name="activity_number">activity_number</string>
 
     <!-- Activity -->
     <string name="profile_activity">profile_activity</string>
@@ -46,6 +52,5 @@
     <string name="next">Next</string>
     <string name="share">Share</string>
     <string name="new_post">New Post</string>
-    <string name="selected_bitmap">selected_bitmap</string>
 
 </resources>

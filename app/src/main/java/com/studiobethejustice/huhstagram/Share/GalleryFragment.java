@@ -29,6 +29,8 @@ import com.studiobethejustice.huhstagram.Utils.GridImageAdapter;
 
 import java.util.ArrayList;
 
+import javax.security.auth.login.LoginException;
+
 public class GalleryFragment extends Fragment {
     private static final String TAG = "GalleryFragment";
 
@@ -156,10 +158,12 @@ public class GalleryFragment extends Fragment {
         gridView.setAdapter(adapter);
 
         //set the first image to be displayed when the activity fragment view is inflated
-
-        if(!imgURLs.isEmpty()) {
+        try{
             setImage(imgURLs.get(0), galleryImage, mAppend);
             mSelectedImage = imgURLs.get(0);
+
+        }catch(ArrayIndexOutOfBoundsException e){
+            Log.e(TAG, "setupGridView: ArrayIndexOutOfBoundsException: " + e.getMessage());
         }
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -200,7 +200,7 @@ public class FirebaseMethods {
     }
 
     private String getTimestamp() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss'z'", Locale.KOREA);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA);
         sdf.setTimeZone(TimeZone.getTimeZone("Japan"));
         return sdf.format(new Date());
 
@@ -379,7 +379,8 @@ public class FirebaseMethods {
                 0,
                 "",
                 StringManipulation.condenseUsername(username),
-                website
+                website,
+                userId
         );
 
         myRef.child(mContext.getString(R.string.dbname_user_account_settings)).
