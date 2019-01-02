@@ -245,7 +245,7 @@ public class FirebaseMethods {
      * @param description
      * @param phoneNumber
      */
-    public void updateUserAccoutSetting(String displayName, String website, String description, long phoneNumber) {
+    public void updateUserAccountSetting(String displayName, String website, String description, long phoneNumber) {
 
         Log.d(TAG, "updateUserAccountSetting: updating user account settings.");
 
@@ -402,7 +402,6 @@ public class FirebaseMethods {
         UserAccountSettings settings = new UserAccountSettings();
         User user = new User();
 
-
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
             // user_account_setting node;
@@ -478,7 +477,6 @@ public class FirebaseMethods {
                 }
             }
         }
-
 
         return new UserSettings(user, settings);
     }

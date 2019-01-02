@@ -71,9 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.VISIBLE);
 
                     firebaseMethods.registerNewEmail(email, password, username);
-
-                    // 성공하면 끝 날수있게 메소드를 만들어야할 듯.
-                    finish();
                 }
             }
         });
@@ -137,13 +134,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 String mUsername = "";
-                mUsername= username + append;
+                mUsername = username + append;
 
                 //add new user to the database
-                firebaseMethods.addNewUser(email, username, "", "", "");
+                firebaseMethods.addNewUser(email, mUsername, "", "", "");
                 Toast.makeText(mContext, "Signup successful. Sending verification email.", Toast.LENGTH_LONG).show();
 
                 mAuth.signOut();
+
+                mProgressBar.setVisibility(View.GONE);
+                finish();
             }
 
             @Override

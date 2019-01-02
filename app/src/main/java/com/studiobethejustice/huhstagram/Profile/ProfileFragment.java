@@ -146,7 +146,7 @@ public class ProfileFragment extends Fragment {
                     Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
 
                     photo.setCaption(objectMap.get(getString(R.string.field_user_caption)).toString());
-                    photo.setTag(objectMap.get(getString(R.string.field_user_tags)).toString());
+                    photo.setTag(objectMap.get(getString(R.string.field_user_tag)).toString());
                     photo.setPhoto_id(objectMap.get(getString(R.string.field_user_photo_id)).toString());
                     photo.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
                     photo.setDate_created(objectMap.get(getString(R.string.field_user_date_created)).toString());

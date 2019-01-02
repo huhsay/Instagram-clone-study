@@ -30,7 +30,7 @@
     <string name="field_user_caption">caption</string>
     <string name="field_user_date_created">date_created</string>
     <string name="field_user_photo_id">photo_id</string>
-    <string name="field_user_tags">tags</string>
+    <string name="field_user_tag">tag</string>
     <string name="field_image_path">image_path</string>
 
 

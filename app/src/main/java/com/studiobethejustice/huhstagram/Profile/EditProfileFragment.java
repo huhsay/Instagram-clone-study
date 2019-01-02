@@ -242,23 +242,23 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
          */
         if(!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
             //update displayname
-            mFirebaseMethods.updateUserAccoutSetting(displayName, null, null, 0);
+            mFirebaseMethods.updateUserAccountSetting(displayName, null, null, 0);
 
         }
 
         if(!mUserSettings.getSettings().getWebsite().equals(website)){
             //update website
-            mFirebaseMethods.updateUserAccoutSetting(null, website, null, 0);
+            mFirebaseMethods.updateUserAccountSetting(null, website, null, 0);
         }
 
         if(!mUserSettings.getSettings().getDescription().equals(description)){
             //update description
-            mFirebaseMethods.updateUserAccoutSetting(null, null, description, 0);
+            mFirebaseMethods.updateUserAccountSetting(null, null, description, 0);
         }
 
         if(!mUserSettings.getSettings().getProfile_photo().equals(phoneNumber)){
             //update phoneNumber
-            mFirebaseMethods.updateUserAccoutSetting(null, null, null, phoneNumber);
+            mFirebaseMethods.updateUserAccountSetting(null, null, null, phoneNumber);
         }
     }
 
