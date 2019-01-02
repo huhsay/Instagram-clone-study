@@ -57,7 +57,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to 'ProfileActivity'");
                 finish();
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_right);
+                overridePendingTransition(R.anim.not_move, R.anim.slide_right);
             }
         });
     }

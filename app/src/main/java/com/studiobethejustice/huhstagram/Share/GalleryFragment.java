@@ -67,7 +67,7 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: closing the gallery fragment.");
                 getActivity().finish();
-                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_right);
+                getActivity().overridePendingTransition(R.anim.not_move, R.anim.slide_down);
             }
         });
 
