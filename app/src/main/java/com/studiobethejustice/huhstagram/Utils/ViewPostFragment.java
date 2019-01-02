@@ -150,17 +150,19 @@ public class ViewPostFragment extends Fragment {
                                     .removeValue();
 
                             mHeart.toggleLike();
-                            getLikesString();
+                            //getLikesString();
+
                         }else if(!mLikedByCurrentUser){
                             //case2: the user has not liked the photo
                             addNewLike();
-
-                            break;
                         }
                     }
+
                     if(!dataSnapshot.exists()){
                         addNewLike();
                     }
+
+                    getLikesString();
                 }
 
                 @Override
@@ -195,7 +197,7 @@ public class ViewPostFragment extends Fragment {
                 .setValue(like);
 
         mHeart.toggleLike();
-        getLikesString();
+        //getLikesString();
     }
 
     private void getLikesString() {
@@ -224,7 +226,7 @@ public class ViewPostFragment extends Fragment {
                                 Log.d(TAG, "onDataChange: found like " +
                                         singleSnapshot.getValue(User.class).getUsername());
 
-                                mUsers.append(singleSnapshot.getValue(User.class).getUser_id()).append(", ");
+                                mUsers.append(singleSnapshot.getValue(User.class).getUsername()).append(", ");
                             }
 
                             String[] splitUsers = mUsers.toString().split(", ");

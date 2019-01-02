@@ -63,7 +63,6 @@ public class FirebaseMethods {
         }
     }
 
-
     public void uploadNewPhoto(String photoType, final String caption, int imageCount, final String imgUrl, Bitmap bm) {
         Log.d(TAG, "uploadNewPhoto: attempting to uplaod new photo.");
 
