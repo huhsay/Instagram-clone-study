@@ -46,7 +46,7 @@ public class BottomNavigationViewHelper {
                     case R.id.ic_circle:
                         Intent intent3 = new Intent(context, ShareActivity.class); // ACTIVITY_NUM = 2;
                         context.startActivity(intent3);
-                        callingActivity.overridePendingTransition(R.anim.slide_up, R.anim.fade_in);
+                        callingActivity.overridePendingTransition(R.anim.slide_up, R.anim.not_move);
 
                         break;
                     case R.id.ic_alert:

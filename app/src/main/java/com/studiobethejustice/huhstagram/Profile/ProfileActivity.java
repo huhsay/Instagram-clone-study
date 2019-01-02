@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.studiobethejustice.huhstagram.R;
-import com.studiobethejustice.huhstagram.ViewPostFragment;
+import com.studiobethejustice.huhstagram.Utils.ViewPostFragment;
 import com.studiobethejustice.huhstagram.models.Photo;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener{
