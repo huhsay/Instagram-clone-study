@@ -30,8 +30,8 @@ public class Heart {
         if (heartRead.getVisibility() == View.VISIBLE) {
             Log.d(TAG, "toggleLike: toggling red heart off.");
 
-            heartRead.setScaleX(0.1f);
-            heartRead.setScaleY(0.1f);
+            heartRead.setScaleX(1f);
+            heartRead.setScaleY(1f);
 
             ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(heartRead, "scaleY", 1f, 0f);
             scaleDownY.setDuration(300);
@@ -41,10 +41,10 @@ public class Heart {
             scaleDownX.setDuration(300);
             scaleDownX.setInterpolator(ACCELERATE_INTERPOLATOR);
 
+            animatorSet.playTogether(scaleDownY, scaleDownX);
+
             heartRead.setVisibility(View.GONE);
             heartWhite.setVisibility(View.VISIBLE);
-
-            animatorSet.playTogether(scaleDownY, scaleDownX);
 
         }else if (heartRead.getVisibility() == View.GONE) {
             Log.d(TAG, "toggleLike: toggling red heart on.");
@@ -60,10 +60,11 @@ public class Heart {
             scaleDownX.setDuration(300);
             scaleDownX.setInterpolator(DECELERATE_INTERPOLATOR);
 
+            animatorSet.playTogether(scaleDownY, scaleDownX);
+
             heartRead.setVisibility(View.VISIBLE);
             heartWhite.setVisibility(View.GONE);
 
-            animatorSet.playTogether(scaleDownY, scaleDownX);
         }
 
         animatorSet.start();

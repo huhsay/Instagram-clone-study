@@ -107,7 +107,6 @@ public class ViewPostFragment extends Fragment {
         setupBottomNavigationView();
         setupFirebaseAuth();
 
-
         return view;
     }
 
@@ -230,7 +229,7 @@ public class ViewPostFragment extends Fragment {
                             }
 
                             String[] splitUsers = mUsers.toString().split(", ");
-                            if (mUsers.toString().contains(mUserAccountSettings.getUsername())) {
+                            if (mUsers.toString().contains(mUserAccountSettings.getUsername()+ ",")) {
                                 mLikedByCurrentUser = true;
                             } else {
                                 mLikedByCurrentUser = false;
@@ -432,6 +431,7 @@ public class ViewPostFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+        mCaption.setText(mPhoto.getCaption());
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override

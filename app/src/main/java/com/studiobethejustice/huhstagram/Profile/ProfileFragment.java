@@ -133,7 +133,8 @@ public class ProfileFragment extends Fragment {
     private void setupGridView() {
         Log.d(TAG, "setupGridView: Setting up image grid.");
 
-        final ArrayList<Photo> photos = new ArrayList<>();
+        final ArrayList<Photo>
+                photos = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query query = reference
                 .child(getString(R.string.dbname_user_photos))
