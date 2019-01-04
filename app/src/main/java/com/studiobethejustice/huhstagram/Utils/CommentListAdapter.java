@@ -1,7 +1,6 @@
 package com.studiobethejustice.huhstagram.Utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.studiobethejustice.huhstagram.models.Comment;
 import com.studiobethejustice.huhstagram.R;
+import com.studiobethejustice.huhstagram.models.Comment;
 import com.studiobethejustice.huhstagram.models.UserAccountSettings;
 
 import java.text.ParseException;
@@ -44,18 +40,18 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
     private int layoutResource;
     private Context mContext;
 
-    public CommentListAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull List<Comment> objects) {
-        super(context, resource, textViewResourceId, objects);
+    public CommentListAdapter(@NonNull Context context, int resource, @NonNull List<Comment> objects) {
+        super(context, resource, objects);
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
         layoutResource = resource;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         TextView comment, username, timestamp, reply, likes;
         CircleImageView profileImage;
-        ImageView like;
+        ImageView like_img;
     }
 
     @NonNull
@@ -64,7 +60,7 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
 
         final ViewHolder holder;
 
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(layoutResource, parent, false);
             holder = new ViewHolder();
 
@@ -72,12 +68,13 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             holder.username = convertView.findViewById(R.id.comment_username);
             holder.timestamp = convertView.findViewById(R.id.comment_time_posted);
             holder.reply = convertView.findViewById(R.id.comment_reply);
-            holder.like = convertView.findViewById(R.id.comment_likes);
+            holder.likes = convertView.findViewById(R.id.comment_likes);
+            holder.like_img = convertView.findViewById(R.id.iv_comment_like);
             holder.profileImage = convertView.findViewById(R.id.comment_profile_image);
 
             convertView.setTag(holder);
 
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -86,9 +83,9 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
 
         //set time stamp difference
         String timestampDifference = getTimestampDifference(getItem(position));
-        if(!timestampDifference.equals(0)){
+        if (!timestampDifference.equals(0)) {
             holder.timestamp.setText(timestampDifference + "d");
-        }else{
+        } else {
             holder.comment.setText("today");
         }
 
@@ -117,6 +114,16 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             }
         });
 
+        try {
+            if (position == 0) {
+                holder.reply.setVisibility(View.GONE);
+                holder.like_img.setVisibility(View.GONE);
+                holder.likes.setVisibility(View.GONE);
+            }
+
+        } catch (NullPointerException e) {
+            Log.e(TAG, "getView: NullPointerException: " + e.getMessage());
+        }
         return convertView;
     }
 
