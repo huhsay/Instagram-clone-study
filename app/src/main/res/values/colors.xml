@@ -12,4 +12,5 @@
 
     <!-- button -->
     <color name="main_blue">#3897f2</color>
+    <color name="darkred">#cc0000</color>
 </resources>

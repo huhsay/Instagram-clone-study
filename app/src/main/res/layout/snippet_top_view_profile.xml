@@ -1,0 +1,149 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/textViewPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="posts"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="posts"
+            app:layout_constraintEnd_toEndOf="@+id/textViewPost"
+            app:layout_constraintStart_toStartOf="@+id/textViewPost"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPost"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textViewFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="followers"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textViewFollowing"
+            app:layout_constraintStart_toEndOf="@+id/textViewPost"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="followers"
+            app:layout_constraintEnd_toEndOf="@+id/textViewFollowers"
+            app:layout_constraintStart_toStartOf="@+id/textViewFollowers"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
+
+        <TextView
+            android:id="@+id/textViewFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
+            android:text="following"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="follwing"
+            app:layout_constraintEnd_toEndOf="@+id/textViewFollowing"
+            app:layout_constraintStart_toStartOf="@+id/textViewFollowing"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFollowing" />
+
+        <TextView
+            android:id="@+id/tv_edit_profile"
+            android:layout_width="200dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/black_border"
+            android:gravity="center"
+            android:text="Edit Profile"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textFollowers"
+            app:layout_constraintStart_toStartOf="@+id/textFollowers"
+            app:layout_constraintTop_toBottomOf="@+id/textFollowers"
+            app:layout_constraintVertical_bias="0.0"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="200dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/follow_button"
+            android:gravity="center"
+            android:text="follow"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textFollowers"
+            app:layout_constraintStart_toStartOf="@+id/textFollowers"
+            app:layout_constraintTop_toBottomOf="@+id/textFollowers"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_unfollow"
+            android:layout_width="200dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/unfollow_button"
+            android:gravity="center"
+            android:text="unfollow"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textFollowers"
+            app:layout_constraintStart_toStartOf="@+id/textFollowers"
+            app:layout_constraintTop_toBottomOf="@+id/textFollowers"
+            app:layout_constraintVertical_bias="0.0"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_following"
+            android:layout_width="200dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/black_border"
+            android:gravity="center"
+            android:text="following"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textFollowers"
+            app:layout_constraintStart_toStartOf="@+id/textFollowers"
+            app:layout_constraintTop_toBottomOf="@+id/textFollowers"
+            app:layout_constraintVertical_bias="0.0" />
+    </android.support.constraint.ConstraintLayout>
+
+</merge>

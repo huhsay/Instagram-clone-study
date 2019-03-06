@@ -35,8 +35,6 @@
     <string name="field_image_path">image_path</string>
     <string name="field_comments">comments</string>
 
-
-
     <!-- photo type -->
     <string name="new_photo">new_photo</string>
     <string name="profile_photo">profile_photo</string>
@@ -46,12 +44,12 @@
     <string name="selected_image">selected_image</string>
     <string name="selected_bitmap">selected_bitmap</string>
     <string name="return_to_fragment">return_to_fragment</string>
+    <string name="intent_user">user</string>
 
     <!-- Activity -->
     <string name="activity_number">activity_number</string>
-
-    <!-- Activity -->
     <string name="profile_activity">profile_activity</string>
+    <string name="search_activity">search_activity</string>
 
     <!-- Strings -->
     <string name="gallery">GALLERY</string>
@@ -62,5 +60,6 @@
     <string name="next">Next</string>
     <string name="share">Share</string>
     <string name="new_post">New Post</string>
+    <string name="view_profile_fragment">ViewProfileFragment</string>
 
 </resources>

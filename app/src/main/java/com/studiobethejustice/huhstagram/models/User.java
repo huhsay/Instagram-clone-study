@@ -1,6 +1,9 @@
 package com.studiobethejustice.huhstagram.models;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
 
     private String user_id;
     private long phone_number;
@@ -17,6 +20,25 @@ public class User {
         this.username = username;
         this.email = email;
     }
+
+    protected User(Parcel in) {
+        user_id = in.readString();
+        phone_number = in.readLong();
+        username = in.readString();
+        email = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getUser_id() {
         return user_id;
@@ -58,5 +80,18 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(user_id);
+        parcel.writeLong(phone_number);
+        parcel.writeString(username);
+        parcel.writeString(email);
     }
 }
